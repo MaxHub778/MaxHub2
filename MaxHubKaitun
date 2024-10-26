@@ -1,4 +1,4 @@
-local HubName = _G.HubNameFr or "Starlight Hub"
+local HubName = _G.HubNameFr or "Max Hub"
 local HubGame = "Blox_FruitKaitun"
 local ConfigName = HubName .. game.Players.LocalPlayer.Name .. "-" .. HubGame .. ".json" 
 local HttpService = game:GetService("HttpService")
@@ -35,7 +35,7 @@ setidentity(8) --hope this fking works
 getgenv().Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local Window = Fluent:CreateWindow({
     Title = HubName,
-    SubTitle = (_G.HubNameFr2 and "- ".._G.HubNameFr2) or "- star-light.site",
+    SubTitle = (_G.HubNameFr2 and "- ".._G.HubNameFr2) or "- https://discord.gg/cnQQJgf2",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 290),
     Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
