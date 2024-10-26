@@ -8,7 +8,7 @@ MenuUI:ButtonAdd("Blox Fruits Kaitun❌",function()
     
     MenuUI:WindowDelete()
 end)
-MenuUI:ButtonAdd("Blox Fruits Auto Bounty✅",function()
+MenuUI:ButtonAdd("Blox Fruits Auto Bounty❌",function()
     
     MenuUI:WindowDelete()
 end)
