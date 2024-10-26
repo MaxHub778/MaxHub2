@@ -9,7 +9,7 @@ MenuUI:ButtonAdd("Blox Fruits Kaitun❌",function()
     MenuUI:WindowDelete()
 end)
 MenuUI:ButtonAdd("Blox Fruits Auto Bounty❌",function()
-    
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/MaxHub778/MaxHub2/refs/heads/main/MaxHubAutoBounty"))()
     MenuUI:WindowDelete()
 end)
 
