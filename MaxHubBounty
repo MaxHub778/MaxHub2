@@ -57,7 +57,7 @@ Config = Config or {
     }
 }
 
-local sitinklib = loadstring(game:HttpGet("https://github.com/ErutTheTeru/uilibrary/blob/main/Sitink%20Lib/Source.lua?raw=true"))()
+local sitinklib = loadstring(game:HttpGet("https://raw.githubusercontent.com/MaxHub778/MaxHub2/refs/heads/main/MaxHubAutoBounty"))()
 
 getgenv().alert = function(title, desc) 
 
