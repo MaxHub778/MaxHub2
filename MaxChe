@@ -986,5 +986,8 @@ elseif SelectMaterial == "Mini Tusk" then
 MMon = "Mythological Pirate"
 MPos = CFrame.new(-13545,470,-6917)
 SP = "Default"
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/MaxHub778/MaxHub2/refs/heads/main/MaxKaitun"))()
+
 end
 end
