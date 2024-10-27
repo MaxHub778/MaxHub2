@@ -163,4 +163,388 @@ getgenv().ContentSet = function(Content1, Content2,Content3)
 	if not Content2 or Content2 == '' then Content2 = 'Farming Level (or None)' end 
 	Top.Text = "Auto Farm: "..Content1
 	Under.Text = "Task: "..Content2 .. Content3
+
+repeat task.wait() until _G.EnLoaded 
+_G.CurrentTask = ""  
+_G.TaskUpdateTick = tick()  
+_G.PirateRaidTick = 0
+getgenv().CheckEnabling = function(taskName)
+    return _G.SavedConfig and _G.SavedConfig['Actions Allowed'] and (_G.SavedConfig['Actions Allowed'][taskName] or _G.SavedConfig[taskName])
+end
+getgenv().refreshTask = function() 
+    if tick()-_G.TaskUpdateTick >= 60 then 
+        _G.CurrentTask = ''
+    end
+    if not SaberQuest or not SaberQuest.KilledShanks then 
+        getgenv().SaberQuest = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("ProQuestProgress")
+    end
+    if not _G.Config then 
+        _G.Config = {}
+    end
+    if not _G.Config.OwnedItems then 
+        _G.Config.OwnedItems = {}
+    end
+    if _G.CurrentTask == '' and _G.Config.OwnedItems.LoadedFr then  
+        if _G.ServerData["PlayerBackpack"]['Special Microchip'] or CheckIsRaiding() then 
+            _G.CurrentTask = 'Auto Raid'
+        elseif _G.ServerData['PlayerData'].DevilFruit == '' and _G.SnipeFruit and _G.FruitSniping and _G.CanEatFruit then 
+            _G.CurrentTask = 'Eat Fruit'
+        elseif #_G.ServerData['Workspace Fruits'] > 0 then 
+            _G.CurrentTask = 'Collect Fruit' 
+        elseif Sea3 and _G.CurrentElite and (not _G.Config.OwnedItems["Yama"] and not _G.ServerData['Server Bosses']['rip_indra True Form'])  then 
+            _G.CurrentTask = 'Hunting Elite'  
+        elseif Sea3 and CheckEnabling('Cursed Dual Katana') and _G.ServerData['PlayerData'].Level >= 2000 and not _G.Config.OwnedItems["Tushita"] and (_G.ServerData['Server Bosses']['rip_indra True Form'] or (getgenv().TushitaQuest and getgenv().TushitaQuest.OpenedDoor)) then 
+            _G.CurrentTask = 'Getting Tushita'
+        elseif Sea3 and CheckEnabling('Cursed Dual Katana') and not _G.Config.OwnedItems["Yama"] and (_G.ServerData['PlayerData']["Elite Hunted"] >= 30 or _G.ServerData['PlayerData'].Level >= 2200) then 
+            _G.CurrentTask = 'Getting Yama' 
+        elseif Sea3 and CheckEnabling('Cursed Dual Katana') and _G.CDKQuest and _G.CDKQuest ~= '' then 
+            _G.CurrentTask = 'Getting Cursed Dual Katana' 
+        elseif Sea3 and CheckEnabling('Mirage Puzzle') and _G.RaceV4Progress and _G.ServerData['PlayerData'].RaceVer == "V3" and _G.Config.OwnedItems['Mirror Fractal'] and _G.Config.OwnedItems['Valkyrie Helm'] and (_G.RaceV4Progress < 4 or (game:GetService("Workspace").Map:FindFirstChild("MysticIsland") and not game.ReplicatedStorage.Remotes.CommF_:InvokeServer("CheckTempleDoor"))) then 
+            _G.CurrentTask = 'Unlocking Mirage Puzzle'
+        elseif (Sea2 or Sea3) and CheckEnabling('Upgrading Race') and _G.ServerData['PlayerData'].Beli >= 2000000 and _G.ServerData['PlayerData'].Level >= 2550 and not table.find({"Ghoul"},_G.ServerData['PlayerData'].Race) and (_G.ServerData['PlayerData'].RaceVer == 'V2') then 
+            _G.CurrentTask = 'Auto Race V3'
+        elseif _G.ServerData['PlayerData'].Level > 200 and CheckEnabling('Saber') and not (_G.Config.OwnedItems["Saber"]) and ((SaberQuest and not SaberQuest.UsedRelic) or _G.ServerData['PlayerData'].Level >= 550) then 
+            _G.CurrentTask = 'Saber Quest'
+        elseif _G.Config and CheckEnabling('Soul Guitar') and _G.Config["Melee Level Values"] and (_G.Config["Melee Level Values"]['Godhuman'] > 0 or _G.ServerData['PlayerData'].Level >= 2400) and _G.ServerData['PlayerData'].Level >= 2300 and not _G.Config.OwnedItems["Soul Guitar"] then 
+            _G.CurrentTask = 'Getting Soul Guitar'
+        elseif Sea3 and (_G.ServerData['Server Bosses']['Soul Reaper'] or _G.ServerData["PlayerBackpack"]['Hallow Essence']) and (not _G.ServerData["Inventory Items"]["Alucard Fragment"] or _G.ServerData["Inventory Items"]["Alucard Fragment"].Count ~= 5) then 
+            _G.CurrentTask = 'Getting Hallow Scythe'
+        elseif Sea3 and CheckEnabling('Mirror Fractal') and ((_G.ServerData['PlayerBackpack']["God's Chalice"] or _G.ServerData['PlayerBackpack']["Sweet Chalice"] ) or _G.ServerData['PlayerData'].Level >= 2550) and not _G.Config.OwnedItems["Mirror Fractal"] then
+            _G.CurrentTask = 'Auto Dough King'
+        elseif _G.ServerData['PlayerData'].Level > 150 
+        and CheckEnabling('Pole (1st Form)') and not _G.Config.OwnedItems["Pole (1st Form)"] 
+        and (_G.ServerData['Server Bosses']['Thunder God']) then 
+            _G.CurrentTask = 'Pole Quest'
+        elseif game.PlaceId == 2753915549 and _G.ServerData['PlayerData'].Level >= 700 and game.ReplicatedStorage.Remotes.CommF_:InvokeServer("DressrosaQuestProgress", "Dressrosa") ~= 0 then 
+            _G.CurrentTask = 'Sea 2 Quest'
+            print('Sea 1',Sea1)
+            print('Sea2',Sea2)
+            print('Sea 3',Sea3)
+        elseif Sea3 and (_G.CakePrince or (_G.ServerData['Server Bosses']['Cake Prince'] or _G.ServerData['Server Bosses']['Dough King'] ))  then 
+            _G.CurrentTask = 'Cake Prince Raid Boss Event'
+        elseif (Sea2 or Sea3) and (_G.ServerData['Server Bosses']['Core'] or (Sea3 and _G.PirateRaidTick and tick()-_G.PirateRaidTick < 60)) then 
+            _G.CurrentTask = '3rd Sea Event'
+        elseif Sea2 and _G.ServerData['PlayerData'].Level >= 850 and game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BartiloQuestProgress", "Bartilo") ~= 3 then
+            _G.CurrentTask = 'Bartilo Quest'
+        elseif Sea2 and _G.ServerData['PlayerData'].Level >= 1500 and game.ReplicatedStorage.Remotes.CommF_:InvokeServer("ZQuestProgress", "Zou") ~= 0 then 
+            _G.CurrentTask = 'Auto Sea 3' 
+        elseif (Sea2 or Sea3) and (_G.RaidBossEvent or _G.ServerData['Server Bosses']['Darkbeard'] or _G.ServerData['Server Bosses']['rip_indra True Form']) then 
+            _G.CurrentTask = 'Auto Raid Boss' 
+        elseif Sea3 and (_G.ServerData['PlayerBackpack']["God's Chalice"] and (not UnCompleteColor() or HasColor(UnCompleteColor().BrickColor.Name))) then 
+            _G.CurrentTask = "Using God's Chalice"
+        elseif CheckEnabling('Upgrading Race') and _G.ServerData['PlayerData'].Beli >= 500000 and _G.Config.OwnedItems["Warrior Helmet"] and _G.ServerData['PlayerData'].RaceVer == 'V1' then 
+            _G.CurrentTask = 'Race V2 Quest' 
+        end  
+        _G.TaskUpdateTick = tick()
+    end
+end 
+local rF1,rF2 
+task.spawn(function()
+    while task.wait(.5) do 
+        rF1,rF2  = pcall(function()
+            refreshTask() 
+        end)
+        if not rF1 then 
+            warn('Refreshing task error:',rF2)
+        end
+    end
+end)    
+if hookfunction then  
+    task.spawn(function()
+        local gameNgu = {}
+        if game.PlaceId == 2753915549 then  
+            gameNgu = {
+                Workspace.Map.SkyArea1.PathwayTemple.Entrance,
+                Workspace.Map.TeleportSpawn.Entrance,
+                Workspace.Map.TeleportSpawn.Exit,
+                Workspace.Map.SkyArea2.PathwayHouse.Exit,
+            }
+            
+        elseif game.PlaceId == 4442272183 then 
+            gameNgu = {
+                Workspace.Map.Dressrosa.FlamingoExit,
+                Workspace.Map.Dressrosa.FlamingoEntrance,
+                Workspace.Map.GhostShip.Teleport,
+                Workspace.Map.GhostShipInterior.Teleport,
+            }
+        else
+            gameNgu = {
+                Workspace.Map.Turtle.Entrance.Door.BossDoor.Hitbox,
+                Workspace.Map.Turtle.MapTeleportB.Hitbox,
+                Workspace.Map.Turtle.Cursed.EntranceTouch,
+                Workspace.Map.Waterfall.MapTeleportA.Hitbox,
+                Workspace.Map.Waterfall.BossRoom.Door.BossDoor.Hitbox,
+                Workspace.Map['Boat Castle'].MapTeleportB.Hitbox,
+                Workspace.Map['Boat Castle'].MapTeleportA.Hitbox,
+                Workspace.Map['Temple of Time'].ClockRoomExit,
+            }  
+        end
+        table.foreach(gameNgu,function(i,v)
+            for i2,v2 in getconnections(v.Touched) do 
+                v2:Disable()
+            end
+        end)
+    end)
+    task.delay(2,function()
+        require(game.ReplicatedStorage.Notification).new = function(v1,v2) 
+            v1 = tostring(v1):gsub("<Color=[^>]+>", "") 
+            local Nof = game.Players.LocalPlayer.Character:FindFirstChild('Notify') or (function() 
+                if not game.Players.LocalPlayer.Character:FindFirstChild('Notify') then 
+                    local nof = Instance.new('StringValue',game.Players.LocalPlayer.Character)
+                    nof.Name = 'Notify'
+                    nof.Value = ''
+                    return nof
+                end 
+            end)()
+            Nof.Value = v1 
+            local FakeLOL = {}
+            function FakeLOL.Display(p18)
+                return true;
+            end; 
+            function FakeLOL.Dead()
+            end
+            return FakeLOL
+        end
+        task.delay(3,function() 
+            warn('Disabling effects') 
+            if hookfunction and not islclosure(hookfunction) then 
+                for i,v in pairs(game.ReplicatedStorage.Assets.GUI:GetChildren()) do 
+                    v.Enabled = false 
+                end
+                hookfunction(require(game:GetService("ReplicatedStorage").Effect.Container.Death), function()end)
+                hookfunction(require(game:GetService("ReplicatedStorage").Effect.Container.Respawn), function()end)
+                hookfunction(require(game:GetService("ReplicatedStorage"):WaitForChild("GuideModule")).ChangeDisplayedNPC,function() end) 
+            end
+        end)
+    end)
+end
+if getgenv().AutoRejoin or AutoRejoin then 
+    print('adding auto rejoin')
+    _G.rejoin = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(
+        child)
+        if not _G.SwitchingServer and child.Name == 'ErrorPrompt' and child:FindFirstChild('MessageArea') and child.MessageArea:FindFirstChild("ErrorFrame") then
+            wait()
+            print('not _G.SwitchingServer',not _G.SwitchingServer)
+            local CurrentErrorTitle = child.TitleFrame.ErrorTitle.Text
+            local CurrentErrorMessage = child.MessageArea.ErrorFrame.ErrorMessage.Text 
+            if CurrentErrorTitle ~= 'Teleport Failed' and not Hopping then 
+                Hopping = true 
+                game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer)  
+            end
+        end
+    end)
+end
+local Tiers = {
+    "Soul Guitar",  
+    'Cursed Dual Katana',
+    'Mirror Fractal',
+    'Upgrading Race',
+    'Mirage Puzzle',
+    --'Rainbown Haki'
+}
+local Skypieaniggalist = {}
+getSkypieas = function()
+    local reutrner = {}
+    local Race
+    for i,v in game.Players:GetChildren() do 
+        Race = v:WaitForChild('Data'):WaitForChild('Race').Value 
+        if Race == 'Skypiea' and not table.find(Skypieaniggalist,v.Name) then 
+            table.insert(reutrner,v.Name)
+        end 
+    end
+    return reutrner
+end
+getSkypiea = function()
+    local skys = getSkypieas()
+    if #skys > 0 then
+        local choss
+        local maxva = 2550 
+        for i,v in pairs(skys) do 
+            if game.Players[v].Data.Level.Value < maxva then 
+                maxva = game.Players[v].Data.Level.Value 
+                choss = v 
+            end 
+        end
+        return choss
+    end
+end
+AutoMiragePuzzle = function()
+    if _G.ServerData['PlayerData'].RaceVer == "V3" and _G.Config.OwnedItems['Mirror Fractal'] and _G.Config.OwnedItems['Valkyrie Helm'] then 
+        if not Sea3 then 
+            TeleportWorld(3)
+        else
+            _G.RaceV4Progress = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("RaceV4Progress", "Check")
+            if _G.RaceV4Progress==1 then 
+                SetContent(tostring(game.ReplicatedStorage.Remotes.CommF_:InvokeServer("RaceV4Progress", "Begin")))
+            elseif _G.RaceV4Progress == 2 then 
+                game.ReplicatedStorage.Remotes.CommF_:InvokeServer(
+                    "requestEntrance",
+                    Vector3.new(28282.5703125, 14896.8505859375, 105.1042709350586)
+                )
+                local AllNPCS = getnilinstances()
+                for i, v in pairs(game:GetService("Workspace").NPCs:GetChildren()) do
+                    table.insert(AllNPCS, v)
+                end
+                for i, v in pairs(AllNPCS) do
+                    if v.Name == "Mysterious Force" then
+                        TempleMysteriousNPC1 = v
+                    end
+                    if v.Name == "Mysterious Force3" then
+                        TempleMysteriousNPC2 = v
+                    end
+                end
+                Tweento(TempleMysteriousNPC2.HumanoidRootPart.CFrame)
+                wait(0.5)
+                if
+                    (TempleMysteriousNPC2.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <
+                        15
+                 then
+                    game.ReplicatedStorage.Remotes.CommF_:InvokeServer("RaceV4Progress", "TeleportBack")
+                end
+                if
+                    (TempleMysteriousNPC1.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <
+                        15
+                 then
+                    game.ReplicatedStorage.Remotes.CommF_:InvokeServer("RaceV4Progress", "Teleport")
+                end
+            elseif _G.RaceV4Progress == 3 then 
+                SetContent(tostring(game.ReplicatedStorage.Remotes.CommF_:InvokeServer("RaceV4Progress", "Continue")))
+            elseif _G.RaceV4Progress == 4 then
+                if game.workspace.Map:FindFirstChild("MysticIsland") and not game.ReplicatedStorage.Remotes.CommF_:InvokeServer("CheckTempleDoor") then
+                    if IsPlayerAlive() then 
+                        local BlueGear = getBlueGear()
+                        local HighestPoint = getHighestPoint() and getHighestPoint().CFrame * CFrame.new(0, 211.88, 0)
+                        if BlueGear and BlueGear.Transparency ~= 1 then 
+                            repeat 
+                                task.wait()
+                                if IsPlayerAlive() then 
+                                    local BlueGearCaller,BlueGearCaller2 = pcall(function()
+                                        for i,v in BlueGear:GetDescendants() do 
+                                            if v.ClassName == 'TouchTransmitter' then 
+                                                firetouchinterest(v.Parent, game.Players.LocalPlayer.Character.HumanoidRootPart, 0)
+                                                firetouchinterest(v.Parent, game.Players.LocalPlayer.Character.HumanoidRootPart, 1)
+                                            end
+                                        end
+                                    end)
+                                    SetContent('Getting Blue Gear...')
+                                    if not BlueGearCaller then 
+                                        print('BlueGearCaller2',BlueGearCaller2)
+                                    end
+                                    Tweento(BlueGear.CFrame)
+                                end
+                            until not BlueGear or not BlueGear.Parent or BlueGear.Transparency == 1 
+                        elseif BlueGear and BlueGear.Transparency == 1 then 
+                            if HighestPoint then 
+                                Tweento(HighestPoint)
+                                if GetDistance(HighestPoint) < 10 then 
+                                    SetContent('Looking at moon...')
+                                    workspace.CurrentCamera.CFrame =
+                                        CFrame.new(
+                                        workspace.CurrentCamera.CFrame.Position,
+                                        game:GetService("Lighting"):GetMoonDirection() + workspace.CurrentCamera.CFrame.Position
+                                    )
+                                    wait()
+                                    SendKey("T",.5)
+                                end
+                            end
+                        elseif HighestPoint then 
+                            if game.Lighting.ClockTime < 18 and game.Lighting.ClockTime > 5 then
+                                TimetoNight = (18 - game.Lighting.ClockTime)*60 
+                                TimeInS = math.floor(TimetoNight%60)
+                                TimeInM = TimetoNight//60
+                                if TimeInM <= 0 then 
+                                    SetContent('Waiting '..tostring(TimeInS).."s to night.")
+                                else 
+                                    SetContent("Waiting "..tostring(TimeInM)..":"..tostring(TimeInS).." to night.")
+                                end
+                            end
+                            Tweento(HighestPoint)
+                        end
+                    end
+                end
+            else
+                _G.CurrentTask = ''
+            end
+        end
+    end
+end
+FindNextTaskTier = function()
+    if _G.Config["Melee Level Values"]['Godhuman'] then 
+        for __,taskK in Tiers do 
+            if table.find(_G.GUIConfig["Allowed Actions"],taskK) then 
+                if __ < 4 then 
+                    if _G.Config.OwnedItems[taskK] then 
+                        table.remove(Tiers,__)
+                    end
+                elseif taskK == 'Upgrading Race' then 
+                    if _G.ServerData['PlayerData'].RaceVer ~= "V3" and _G.ServerData['PlayerData'].RaceVer ~= 'V4' then 
+                        return taskK 
+                    else
+                        table.remove(Tiers,__)
+                    end
+                elseif taskK == 'Mirage Puzzle' then 
+                    if not game.ReplicatedStorage.Remotes.CommF_:InvokeServer("CheckTempleDoor") then 
+                        return taskK
+                    else
+                        table.remove(Tiers,__)
+                    end
+                elseif taskK == 'Rainbown Haki' then 
+
+                end
+            end
+        end
+    end 
+end
+AutoDoughKing = function()
+    local CP = _G.ServerData['Server Bosses']['Dough King'] or _G.ServerData['Server Bosses']['Cake Prince']
+    if CP then 
+        if _G.SpamSpawnCakePrince then 
+            _G.SpamSpawnCakePrince:Disconnect()
+            _G.SpamSpawnCakePrince = nil 
+        end
+        KillBoss(CP)
+        game.ReplicatedStorage.Remotes.CommF_:InvokeServer(
+            "RaidsNpc",
+            "Select",
+            "Dough"
+        )
+    elseif _G.ServerData["PlayerBackpack"]['Sweet Chalice'] then 
+        local MobLeft = tonumber(string.match(game.ReplicatedStorage.Remotes.CommF_:InvokeServer("CakePrinceSpawner", true),'%d+')) or 0
+        task.spawn(function()
+            if MobLeft <= 8 then
+                if not _G.SpamSpawnCakePrince then 
+                    _G.SpamSpawnCakePrince = game.RunService.Heartbeat:Connect(function()
+                        game.ReplicatedStorage.Remotes.CommF_:InvokeServer("CakePrinceSpawner") 
+                    end)
+                end
+            elseif MobLeft >= 400 then 
+                if _G.SpamSpawnCakePrince then 
+                    _G.SpamSpawnCakePrince:Disconnect()
+                    _G.SpamSpawnCakePrince = nil 
+                end
+            end
+        end)
+        if MobLeft > 0 then 
+            KillMobList({
+                "Cookie Crafter",
+                "Cake Guard",
+                "Head Baker",
+                "Baking Staff"
+            })
+        end
+    elseif _G.ServerData["PlayerBackpack"]["God's Chalice"] then 
+        if CheckMaterialCount('Conjured Cocoa') >= 10 then 
+            game.ReplicatedStorage.Remotes.CommF_:InvokeServer("SweetChaliceNpc")
+        else
+            KillMobList({
+                "Cocoa Warrior",
+                "Chocolate Bar Battler"
+            })
+        end
+    elseif CheckMaterialCount('Conjured Cocoa') < 10 then 
+        KillMobList({
+            "Cocoa Warrior",
+            "Chocolate Bar Battler"
+        })
+
 end
