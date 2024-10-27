@@ -5435,5 +5435,5 @@ function(TextBoxGradientColorTable)
             TextLabel.Visible = false
         end)
     end)
-end
 
+end
