@@ -544,7 +544,6 @@ AutoDoughKing = function()
     elseif CheckMaterialCount('Conjured Cocoa') < 10 then 
         KillMobList({
             "Cocoa Warrior",
-            "Chocolate Bar Battler"
-        })
+            "Chocolate Bar Battler"})
 
 end
