@@ -164,4 +164,3 @@ getgenv().ContentSet = function(Content1, Content2,Content3)
 	Top.Text = "Auto Farm: "..Content1
 	Under.Text = "Task: "..Content2 .. Content3
 end
-loadstring(game:HttpGet("https://raw.githubusercontent.com/MaxHub778/MaxHub2/refs/heads/main/MaxHubKaitun"))()
