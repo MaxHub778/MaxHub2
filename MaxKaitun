@@ -2218,6 +2218,4 @@ AutoSaber = loadstring(game:HttpGet('https://raw.githubusercontent.com/memaybeoh
         else  
             EquipWeaponName("Torch") 
             Tweento(CFrame.new(1115.23499,4.92147732,4349.36963,-0.670654476,-2.18307523e-08,0.74176991,-9.06980624e-09,1,2.1230365e-08,-0.74176991,7.51052998e-09,-0.670654476))
-        end  
-    end
-end]]
+        end
