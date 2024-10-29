@@ -2365,7 +2365,7 @@ getgenv().AutoL = function()
             })
                 end
              end
-          end]]
+          end
         end
      end
   end
