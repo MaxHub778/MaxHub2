@@ -163,7 +163,7 @@ getgenv().ContentSet = function(Content1, Content2,Content3)
 	if not Content2 or Content2 == '' then Content2 = 'Farming Level (or None)' end 
 	Top.Text = "Auto Farm: "..Content1
 	Under.Text = "Task: "..Content2 .. Content3
- end
+
 
 repeat task.wait() until _G.EnLoaded 
 _G.CurrentTask = ""  
@@ -1987,10 +1987,6 @@ AutoRaceV2 = function()
                 task.wait()
             until _G.ServerData["PlayerBackpack"]['Flower 3'] or not IsPlayerAlive() 
 
-        end
-    end
-end
-
 AutoBartiloQuest = function()
     local QuestBartiloId = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BartiloQuestProgress", "Bartilo")
     if QuestBartiloId == 0 then 
@@ -2367,6 +2363,10 @@ getgenv().AutoL = function()
                 "Head Baker",
                 "Baking Staff"
             })
+                end
+             end
+          end
         end
-    end
+     end
+  end
 end
