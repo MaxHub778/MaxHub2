@@ -35,7 +35,7 @@ setidentity(8) --hope this fking works
 getgenv().Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local Window = Fluent:CreateWindow({
     Title = HubName,
-    SubTitle = (_G.HubNameFr2 and "- ".._G.HubNameFr2) or "- star-light.site",
+    SubTitle = (_G.HubNameFr2 and "- ".._G.HubNameFr2) or "- discord.gg/cnQQJgf2",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 290),
     Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
