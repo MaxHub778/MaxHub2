@@ -31,7 +31,7 @@ DiscordUrlTextLabel["BackgroundTransparency"] = 1;
 DiscordUrlTextLabel["AnchorPoint"] = Vector2.new(0.5, 0.5);
 DiscordUrlTextLabel["Size"] = UDim2.new(0, 200, 0, 50);
 DiscordUrlTextLabel["BorderColor3"] = Color3.fromRGB(142, 66, 133);
-DiscordUrlTextLabel["Text"] = [[discord.gg/cnQQJgf2]];
+DiscordUrlTextLabel["Text"] = [[discord.gg/tsuoscripts]];
 DiscordUrlTextLabel["Position"] = UDim2.new(0.5, 0, -0.025, 0);
 
 local DiscordUrlUiStroke = Instance.new("UIStroke", DiscordUrlTextLabel);
@@ -159,8 +159,8 @@ end)
 Top.Text = 'Auto Farm: None'
 Under.Text = "Task: None" 
 getgenv().ContentSet = function(Content1, Content2,Content3)
-	if not Content1 then Content1 = '🔴' end 
-	if not Content2 or Content2 == '' then Content2 = 'Farming Level (or None)' end
+	if not Content1 then Content1 = '🔴 (Not Found)' end 
+	if not Content2 or Content2 == '' then Content2 = 'Farming Level (or None)' end 
 	Top.Text = "Auto Farm: "..Content1
 	Under.Text = "Task: "..Content2 .. Content3
 
