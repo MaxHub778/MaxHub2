@@ -159,8 +159,8 @@ end)
 Top.Text = 'Auto Farm: None'
 Under.Text = "Task: None" 
 getgenv().ContentSet = function(Content1, Content2,Content3)
-	if not Content1 then Content1 = '🔴'  end
-	if not Content2 or Content2 == '' then Content2 = 'Farming Level (or None)' end 
+	if not Content1 then Content1 = '🔴'  
+	if not Content2 or Content2 == '' then Content2 = 'Farming Level (or None)' 
 	Top.Text = "Auto Farm: "..Content1
 	Under.Text = "Task: "..Content2 .. Content3
 
@@ -2363,10 +2363,11 @@ getgenv().AutoL = function()
                 "Head Baker",
                 "Baking Staff"
             })
-                end
-             end
-          end
-        end
-     end
-  end
+                    end
+                 end
+              end
+            end
+         end
+      end
+   end
 end
