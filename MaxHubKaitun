@@ -162,6 +162,8 @@ function(StatusGuiConfig)
         Top.Text = "Auto Farm: "..Content1
         Under.Text = "Task: "..Content2 .. Content3
     end
+    return Returning
+end
 
 repeat task.wait() until _G.EnLoaded 
 _G.CurrentTask = ""  
