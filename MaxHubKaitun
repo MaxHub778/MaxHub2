@@ -1,4 +1,4 @@
-local ScreenGui = Instance.new("ScreenGui");
+ocal ScreenGui = Instance.new("ScreenGui");
 local DropShadowHolder = Instance.new("Frame");
 local DropShadow = Instance.new("ImageLabel");
 local Main = Instance.new("Frame");
@@ -157,15 +157,14 @@ Under:GetPropertyChangedSignal("Text"):Connect(function()
 end)
 
 Top.Text = 'Auto Farm: None'
-Under.Text = "Task: None" 
+Under.Text = "Task: None"
 getgenv().ContentSet = function(Content1, Content2,Content3)
 	if not Content1 then Content1 = 'None (Not Found)' end 
 	if not Content2 or Content2 == '' then Content2 = 'Farming Level (or None)' end 
 	Top.Text = "Auto Farm: "..Content1
 	Under.Text = "Task: "..Content2 .. Content3
-end
 
-ocal namequest
+local namequest
 local BlackListedKillPlayers = {}
 IsBossDrop = function()
     if _G.HavingX2 then return end 
