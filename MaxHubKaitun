@@ -1001,7 +1001,7 @@ AutoSoulGuitar = function()
                         CheckRemote = game.ReplicatedStorage.Remotes["CommF_"]:InvokeServer("gravestoneEvent", 2) 
                         if CheckRemote ~= true then return end 
                         require(game.ReplicatedStorage.Effect).new("BlindCam"):replicate({
-                            Color = Color3.new(0.03, 0.03, 0.03), 
+                            Color = Color3.new(223, 115, 255), 
                             Duration = 2, 
                             Fade = 0.25, 
                             ZIndex = -10
