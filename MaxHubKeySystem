@@ -9,7 +9,7 @@ coroutine.wrap(function()
 end)()
 library:Introduction()
 wait(0)
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/MaxHub778/MaxHub2/refs/heads/main/MaxMain")))()
+loadstring(game:HttpGet(("")))()
 MakeWindow({
   Hub = {
     Title = "Max Hub",
