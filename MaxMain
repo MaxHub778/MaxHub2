@@ -12,4 +12,8 @@ MenuUI:ButtonAdd("Blox Fruits Auto Bounty❌",function()
     
     MenuUI:WindowDelete()
 end)
+MenuUI:ButtonAdd("Murder Mystery 2✅",function()
+    loadstring(game:HttpGet("https://github.com/MaxHub778/MaxHub2/raw/refs/heads/main/MaxHubMM2"))()
+    MenuUI:WindowDelete()
+end)
 --open source niggas
