@@ -1,7 +1,7 @@
 local MenuUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/ZoiIntra/SetUIY/main/One.lua"))()
 MenuUI:WindowCreate("Max Sea","rbxassetid://6443526609","discord.gg/espVN5ym")
 MenuUI:ButtonAdd("Blox Fruits Hub✅",function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/MaxHub778/MaxHub2/refs/heads/main/MaxHubMain"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/MaxHub778/MaxHub2/refs/heads/main/MaxHubMeme"))()
     MenuUI:WindowDelete()
 end)
 MenuUI:ButtonAdd("Blox Fruits Kaitun❌",function()
