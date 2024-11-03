@@ -10,7 +10,7 @@
 setclipboard("https://discord.gg/espVN5ym")
 -- List Of Games Script 👾
 local MenuUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/ZoiIntra/SetUIY/main/One.lua"))()
-MenuUI:WindowCreate("Max Hub","rbxassetid://6443526609","discord.gg/espVN5ym")
+MenuUI:WindowCreate("Max Hub","rbxassetid://12158615170","discord.gg/espVN5ym")
 MenuUI:ButtonAdd("Blox Fruits Hub✅",function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/MaxHub778/MaxHub2/refs/heads/main/MaxHubMain"))()
     MenuUI:WindowDelete()
