@@ -5,7 +5,7 @@ local KeySystemUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/M
 KeySystemUI.New({
     ApplicationName = "max hub", -- Your Key System Application Name
     Name = "Max Hub", -- Your Script name
-    Info = "", -- Info text in the GUI, keep empty for default text.
+    Info = "Enter your key for Max Hub", -- Info text in the GUI, keep empty for default text.
     DiscordInvite = "discord.gg/KKZ49KDK", -- Optional.
     AuthType = "https://keyrblx.com/getkey/ProjectX" -- Can select verification with ClientId or IP ("clientid" or "ip")
 })
