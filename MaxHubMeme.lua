@@ -42,7 +42,7 @@ L2.BorderSizePixel = 0
 L2.Position = UDim2.new(0.1208, 0, 0.0953, 0)
 L2.Size = UDim2.new(0, 50, 0, 50)
 L2.Font = Enum.Font.LuckiestGuy
-L2.Text = "Max Hub"
+L2.Text = "Xyris Hub"
 L2.TextColor3 = Color3.fromRGB(255, 255, 255)
 L2.TextSize = 9.000
 L2.Draggable = true
@@ -65,7 +65,7 @@ TextLabel.BorderSizePixel = 0
 TextLabel.Position = UDim2.new(0.359138072, 0, -0.025062656, 0)
 TextLabel.Size = UDim2.new(0, 200, 0, 50)
 TextLabel.Font = Enum.Font.FredokaOne
-TextLabel.Text = "discord.gg/espVN5ym"
+TextLabel.Text = "https://discord.gg/3WtS2F7CaX"
 TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 TextLabel.TextSize = 19.000
 
@@ -77,17 +77,17 @@ local Window = Fluent:CreateWindow({
     TabWidth = 140,
     Size = UDim2.fromOffset(590, 320),
     Acrylic = false, 
-    Theme = "Rose",
+    Theme = "Dark",
     MinimizeKey = Enum.KeyCode.LeftControl 
 })
 
 --Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
-Main = Window:AddTab({ Title = "Tab Main", Icon = "home" })
-Stats = Window:AddTab({ Title = "Tab Stats Upgrade", Icon = "plus-circle" })
-NPC = Window:AddTab({ Title = "Tab NPC", Icon = "baby" })
-Skill = Window:AddTab({ Title = "Tab Skills", Icon = "baby" })
-MiscTab = Window:AddTab({ Title = "Tab Misc", Icon = "list-plus" })
-ShopTab = Window:AddTab({ Title = "Tab Shop", Icon = "shopping-cart" })
+Main = Window:AddTab({ Title = "Tab Main", Icon = "" })
+Stats = Window:AddTab({ Title = "Tab Stats Upgrade", Icon = "" })
+NPC = Window:AddTab({ Title = "Tab NPC", Icon = "" })
+Skill = Window:AddTab({ Title = "Tab Skills", Icon = "" })
+MiscTab = Window:AddTab({ Title = "Tab Misc", Icon = "" })
+ShopTab = Window:AddTab({ Title = "Tab Shop", Icon = "" })
 getgenv().Options = Fluent.Options
 function notify(title, content, time)
     Fluent:Notify({
@@ -119,22 +119,22 @@ function Save(i, v)
     if i ~= nil then
         Config[i] = v
     end
-    if not isfolder("Max Hub") then
-        makefolder("Max Hub")
+    if not isfolder("Xyris Hub") then
+        makefolder("Xyris Hub")
     end
-    writefile("Max Hub" .. "/" .. "MemeSea-" .. game.Players.LocalPlayer.Name .. ".json",
+    writefile("Xyris Hub" .. "/" .. "MemeSea-" .. game.Players.LocalPlayer.Name .. ".json",
         game:GetService("HttpService"):JSONEncode(Config))
 end
 
 function read()
-    if not isfolder("Max Hub") then
-        makefolder("Max Hub")
+    if not isfolder("Xyris Hub") then
+        makefolder("Xyris Hub")
     end
-    if not pcall(function() readfile("Max Hub/MemeSea-" .. game.Players.LocalPlayer.Name .. ".json") end) then
-        writefile("Max Hub/MemeSea-" .. game.Players.LocalPlayer.Name .. ".json",
+    if not pcall(function() readfile("Xyris Hub/MemeSea-" .. game.Players.LocalPlayer.Name .. ".json") end) then
+        writefile("Xyris Hub/MemeSea-" .. game.Players.LocalPlayer.Name .. ".json",
             game:GetService("HttpService"):JSONEncode(Config))
     end
-    for key, value in pairs(game:GetService("HttpService"):JSONDecode(readfile("Max Hub/MemeSea-" .. game.Players.LocalPlayer.Name .. ".json"))) do
+    for key, value in pairs(game:GetService("HttpService"):JSONDecode(readfile("Xyris Hub/MemeSea-" .. game.Players.LocalPlayer.Name .. ".json"))) do
         Config[key] = value
     end
 end
@@ -1618,7 +1618,7 @@ do
     })
 end
 game.StarterGui:SetCore("SendNotification", {
-Title = "Max Hub",
+Title = "Xyris Hub",
 Text = "Successfully",
 Duration = 5,
 })
