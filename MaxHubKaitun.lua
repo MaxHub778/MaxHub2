@@ -3104,7 +3104,7 @@ local info = setmetatable({
             return {
                 Service = "Max",                   -- Your service name
                 DisplayName = "Max Hub",      -- Display name
-                API_Key = "xLc0o7Kl65Ue78jv",             -- Your API key
+                API_Key = "ProjectX",             -- Your API key
                 IsDebug = false,                           -- Enable debug mode (optional)
                 Allow_BlacklistUsers = false,             -- Allow blacklisted users (optional)
                 Save_Key = false,                          -- Save the key to the user's data (optional)
