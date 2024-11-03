@@ -19,7 +19,7 @@ if gameId == 2753915549 or gameId == 4442272183 or gameId == 7449423635 then
 elseif gameId == 10260193230 then
     -- Meme Sea
     print("Detectado Meme Sea, executando script...")
-    safeLoad("https://raw.githubusercontent.com/Tsuo7/TsuoHub/main/memesea")
+    safeLoad("https://raw.githubusercontent.com/MaxHub778/MaxHub2/refs/heads/main/MaxMainsea.lua")
 else
     print("Jogo não reconhecido. Nenhum script foi executado.")
 end
