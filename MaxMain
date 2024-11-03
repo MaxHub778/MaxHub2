@@ -1,3 +1,21 @@
+-- KEY SYSTEM V2 UI LIBRARY:
+-- UI by mr.xrer | Code by Imij
+
+local KeySystemUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/MaGiXxScripter0/keysystemv2api/master/ui/xrer_mstudio45.lua"))()
+KeySystemUI.New({
+    ApplicationName = "max hub", -- Your Key System Application Name
+    Name = "Max Hub", -- Your Script name
+    Info = "", -- Info text in the GUI, keep empty for default text.
+    DiscordInvite = "discord.gg/KKZ49KDK", -- Optional.
+    AuthType = "https://keyrblx.com/getkey/ProjectX" -- Can select verification with ClientId or IP ("clientid" or "ip")
+})
+repeat task.wait() until KeySystemUI.Finished() or KeySystemUI.Closed
+if KeySystemUI.Finished() and KeySystemUI.Closed == false then
+    print("Key verified, can load script")
+else
+    print("Player closed the GUI.")
+end
+
 local MenuUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/ZoiIntra/SetUIY/main/One.lua"))()
 MenuUI:WindowCreate("Max Hub","rbxassetid://6443526609","discord.gg/espVN5ym")
 MenuUI:ButtonAdd("Blox Fruits Hub✅",function()
